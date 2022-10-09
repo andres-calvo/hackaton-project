@@ -2,12 +2,8 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import type { ConfigOptions } from "@web3modal/react";
 import { Web3Modal } from "@web3modal/react";
-import {chains, providers } from "@web3modal/ethereum";
+import { chains, providers } from "@web3modal/ethereum";
 
-// const { chains, provider } = configureChains(
-//   [chain.goerli, chain.polygonMumbai],
-//   [publicProvider()]
-// );
 const config: ConfigOptions = {
   projectId: process.env.WALLETCONNECTID as string,
   theme: "dark",
@@ -22,10 +18,6 @@ const config: ConfigOptions = {
     ],
   },
 };
-// const wagmiClient = createClient({
-//   autoConnect: true,
-//   provider,
-// });
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -37,10 +29,3 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp;
-
-// const getLibrary = (provider: any) => {
-//   console.log(provider);
-//   const library = new ethers.providers.Web3Provider(provider);
-//   library.pollingInterval = 8000;
-//   return library;
-// };

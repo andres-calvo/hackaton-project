@@ -2,15 +2,19 @@ import type { NextPage } from "next";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ConnectButton } from "@web3modal/react";
 import { useAccount, useNetwork } from "@web3modal/react";
+import { useRead } from "../src/store";
 
 const Home: NextPage = () => {
   const { address, isConnected } = useAccount();
   const { chain, chains } = useNetwork();
+  const { data } = useRead();
   console.log(`
   
   Address ${address}
   isConnected ${isConnected}
   chain ${chain?.network}
+
+  data contract ${data}
 
   `);
   return (
@@ -46,10 +50,10 @@ const ButtonTokens = ({ token = "" }) => {
   return (
     <button className="bg-slate-600 shadow-2xl rounded-xl px-2 py-1 ">
       <div className="flex items-center text-white">
-        <span className="mr-2">{token}</span>
-        <div className="text-3xl">
+        <span className="">{token}</span>
+        {/* <div className="text-3xl">
           <RiArrowDropDownLine className="text-white" />
-        </div>
+        </div> */}
       </div>
     </button>
   );
