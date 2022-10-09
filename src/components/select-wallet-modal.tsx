@@ -20,7 +20,7 @@ export const SelectWalletModal = ({
           <AiOutlineClose className="cursor-pointer" onClick={closeModal} />
         </div>
         <WalletButton
-          name="Wallet Connect"
+          name="Coinbase Wallet"
           onClick={() => {
             activate(connectors.coinbaseWallet);
             closeModal();
@@ -30,6 +30,7 @@ export const SelectWalletModal = ({
         <WalletButton
           name="Wallet Connect"
           onClick={() => {
+            console.log("walletConnect");
             activate(connectors.walletConnect);
             closeModal();
           }}

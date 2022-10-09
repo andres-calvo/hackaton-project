@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp;
 
 const getLibrary = (provider: any) => {
+  console.log(provider)
   const library = new ethers.providers.Web3Provider(provider);
   library.pollingInterval = 8000;
   return library;

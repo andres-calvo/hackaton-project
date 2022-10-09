@@ -9,15 +9,16 @@ const injected = new InjectedConnector({
 const walletconnect = new WalletConnectConnector({
   rpc: `https://goerli.infura.io/v3/${process.env.INFURA_KEY}`,
   bridge: "https://bridge.walletconnect.org",
-  qrcode: true
+  qrcode: true,
 });
+
 
 /**
  * Actually this is Coinbase Wallet
  */
 const walletlink = new WalletLinkConnector({
   url: `https://goerli.infura.io/v3/${process.env.INFURA_KEY}`,
-  appName: "hackaton-project"
+  appName: "hackaton-project",
 });
 
 export const connectors = {
