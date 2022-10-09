@@ -2,9 +2,13 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { SelectWalletModal } from "../src/components/select-wallet-modal";
+import { useWeb3React } from "@web3-react/core";
+import { useSyncWallets } from "../src/store";
 
 const Home: NextPage = () => {
   const [openModal, setOpenModal] = useState(false);
+  const { active, chainId, account } = useWeb3React();
+  useSyncWallets()
   return (
     <section className="h-screen w-screen">
       <div className="flex justify-center w-full items-center h-full">
@@ -22,7 +26,11 @@ const Home: NextPage = () => {
               <InputAmount />
               <ButtonTokens token="RARG" />
             </div>
-            <ConnectWallet onClick={()=>setOpenModal(true)} />
+            {!active && <ConnectWallet onClick={() => setOpenModal(true)} />}
+            <div>
+              <p>chain ID {chainId}</p>
+              <p>Account {account}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -49,7 +57,7 @@ const ButtonTokens = ({ token = "" }) => {
   );
 };
 
-const ConnectWallet = ({onClick=()=>{}}) => {
+const ConnectWallet = ({ onClick = () => {} }) => {
   return (
     <button
       className="

@@ -1,17 +1,19 @@
 import { useWeb3React } from "@web3-react/core";
 import { connectors } from "../connectors";
 import { AiOutlineClose } from "react-icons/ai";
+import {  useConnectModal } from '@web3modal/react'
 export const SelectWalletModal = ({
   isOpen = false,
   closeModal = () => {},
 }) => {
-  const { activate } = useWeb3React();
+  const { activate, } = useWeb3React();
+  const { isOpen:isOpenWalletConnect, open, close } = useConnectModal()
   if (!isOpen) return null;
   return (
     <div
       className="fixed w-screen h-screen 
      top-0 left-0 
-     flex justify-center items-center "
+     flex justify-center items-center"
     >
       <div className="opacity-70  fixed top-0 left-0 w-screen h-screen bg-neutral-900"></div>
       <div className="bg-white z-10 p-4 rounded-xl flex flex-col gap-4 w-80">
@@ -28,11 +30,10 @@ export const SelectWalletModal = ({
           icon="/cbw.png"
         />
         <WalletButton
-          name="Wallet Connect"
+          name="WalletConnect"
           onClick={() => {
             console.log("walletConnect");
-            activate(connectors.walletConnect);
-            closeModal();
+            open()
           }}
           icon="/wc.png"
         />
