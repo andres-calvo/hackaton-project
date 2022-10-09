@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 const Home: NextPage = () => {
-  const { address, isConnected } = useAccount();
+  const { isConnected } = useAccount();
   const { write, data: swapData, isLoading } = useWriteTx();
   const { register, getValues, formState, setValue } = useForm({
     mode: "onChange",
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
     hash: swapData?.hash,
   });
   const { isValid } = formState;
-
+  useEffect;
   useEffect(() => {
     if (transactionData && !isLoadingTransaction) {
       const { token1, token2 } = getValues();
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
               {...register("token1", {
                 required: true,
                 onChange: (e) => {
-                  setValue("token2", e.target.value/30.9);
+                  setValue("token2", e.target.value / 30.9);
                 },
               })}
             />
