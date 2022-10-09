@@ -1,14 +1,18 @@
 import type { NextPage } from "next";
-import { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { SelectWalletModal } from "../src/components/select-wallet-modal";
-import { useWeb3React } from "@web3-react/core";
-import { useSyncWallets } from "../src/store";
+import { ConnectButton } from "@web3modal/react";
+import { useAccount, useNetwork } from "@web3modal/react";
 
 const Home: NextPage = () => {
-  const [openModal, setOpenModal] = useState(false);
-  const { active, chainId, account } = useWeb3React();
-  useSyncWallets()
+  const { address, isConnected } = useAccount();
+  const { chain, chains } = useNetwork();
+  console.log(`
+  
+  Address ${address}
+  isConnected ${isConnected}
+  chain ${chain?.network}
+
+  `);
   return (
     <section className="h-screen w-screen">
       <div className="flex justify-center w-full items-center h-full">
@@ -26,18 +30,12 @@ const Home: NextPage = () => {
               <InputAmount />
               <ButtonTokens token="RARG" />
             </div>
-            {!active && <ConnectWallet onClick={() => setOpenModal(true)} />}
-            <div>
-              <p>chain ID {chainId}</p>
-              <p>Account {account}</p>
+            <div className="w-full flex justify-center mt-10">
+              {isConnected ? <Swap /> : <ConnectButton />}
             </div>
           </div>
         </div>
       </div>
-      <SelectWalletModal
-        isOpen={openModal}
-        closeModal={() => setOpenModal(false)}
-      />
     </section>
   );
 };
@@ -57,7 +55,7 @@ const ButtonTokens = ({ token = "" }) => {
   );
 };
 
-const ConnectWallet = ({ onClick = () => {} }) => {
+const Swap = ({ onClick = () => {} }) => {
   return (
     <button
       className="
@@ -70,7 +68,7 @@ const ConnectWallet = ({ onClick = () => {} }) => {
           "
       onClick={onClick}
     >
-      Connect Wallet
+      Swap
     </button>
   );
 };
